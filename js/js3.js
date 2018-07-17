@@ -34,11 +34,15 @@ jobTitleSelect.addEventListener("change", function() {
 	}
 });
 
-colorOptions[0].hidden = "true";
+// Updated
+colorOptions[0].innerText = "Please select a T-shirt theme";
+colorOptions.forEach(option => option.hidden = "true");
+//
 
 designSelect.addEventListener("change", function() {
 	designSelected = designSelect.value;
 	if ( designSelected.includes("pun") ) {
+		colorOptions[1].selected = "true";
 		for ( let i=0; i<colorOptions.length; i++) {
 			colorOptions[i].hidden = "true";
 		}
@@ -48,10 +52,12 @@ designSelect.addEventListener("change", function() {
 			}
 		}
 	} else if ( designSelected.includes("Select") ) {
-		for ( let i=0; i<colorOptions.length; i++) {
-			colorOptions[i].removeAttribute("hidden");
-		}
+		// Updated
+		colorOptions[0].selected = "true";
+		colorOptions.forEach(option => option.hidden = "true");
+		//
 	} else {
+		colorOptions[4].selected = "true";
 		for ( let i=0; i<colorOptions.length; i++) {
 			colorOptions[i].hidden = "true";
 		}
@@ -165,7 +171,7 @@ mainForm.addEventListener("submit", function(e) {
 			return false;
 			} else {
 				if ( this.fieldElement.nextElementSibling !== null &&
-					 this.fieldElement.nextElementSibling.innerText == this.errorMsg 
+					 this.fieldElement.nextElementSibling.innerText == this.errorMsg
 					) {
 					this.fieldElement.nextElementSibling.innerText = "";
 					updateElementClasses.remove(this.fieldElement, errorBorder);
@@ -249,7 +255,7 @@ mainForm.addEventListener("submit", function(e) {
 			cvvField.validate() &&
 			zipcodeField.validate()
 			)
-		) 
+		)
 		{
 			e.target.submit();
 		}
